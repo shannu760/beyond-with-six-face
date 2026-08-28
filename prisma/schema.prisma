@@ -1,0 +1,341 @@
+// Prisma Schema for BEYOND AI Full-Stack Platform
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  passwordHash  String
+  name          String
+  avatar        String?
+  role          String         @default("USER") // USER, ADMIN
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  profile       Profile?
+  memberships   Membership[]
+  generations   Generation[]
+  projects      Project[]
+  automations   Automation[]
+  notifications Notification[]
+  usages        Usage[]
+}
+
+model Profile {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  company         String?
+  jobTitle        String?
+  bio             String?
+  website         String?
+  preferencesJson String   @default("{}")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Organization {
+  id            String         @id @default(uuid())
+  name          String
+  slug          String         @unique
+  logo          String?
+  plan          String         @default("STARTER") // STARTER, PRO, ENTERPRISE
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  memberships   Membership[]
+  brandKits     BrandKit[]
+  projects      Project[]
+  campaigns     Campaign[]
+  assets        Asset[]
+  generations   Generation[]
+  automations   Automation[]
+  agents        Agent[]
+  subscriptions Subscription[]
+  transactions  Transaction[]
+  usages        Usage[]
+  apiKeys       ApiKeyConfig[]
+}
+
+model Membership {
+  id             String       @id @default(uuid())
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role           String       @default("MEMBER") // OWNER, ADMIN, MEMBER, VIEWER
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([userId, organizationId])
+}
+
+model BrandKit {
+  id              String       @id @default(uuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name            String
+  logoUrl         String?
+  primaryColor    String       @default("#00F0FF")
+  secondaryColor  String       @default("#7928CA")
+  accentColor     String       @default("#3B82F6")
+  fontHeading     String       @default("Inter")
+  fontBody        String       @default("Inter")
+  brandVoice      String       @default("Bold, visionary, high-conversion, futuristic")
+  targetAudience  String       @default("Modern businesses, tech startups, e-commerce brands")
+  industry        String       @default("Technology & SaaS")
+  description     String?
+  websiteUrl      String?
+  socialLinksJson String       @default("{}")
+  isDefault       Boolean      @default(false)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  generations     Generation[]
+}
+
+model Project {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String
+  description    String?
+  category       String       @default("GENERAL") // ADS, BANNER, POSTER, VIDEO, BRAND, CAMPAIGN
+  status         String       @default("ACTIVE") // ACTIVE, ARCHIVED, COMPLETED
+  thumbnail      String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  campaigns      Campaign[]
+  generations    Generation[]
+  assets         Asset[]
+}
+
+model Campaign {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  projectId      String?
+  project        Project?     @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  name           String
+  objective      String       // SALES, LEADS, AWARENESS, TRAFFIC, ENGAGEMENT
+  targetAudience String
+  budget         Float        @default(0)
+  status         String       @default("ACTIVE") // PLANNING, ACTIVE, PAUSED, COMPLETED
+  platformsJson  String       @default("[]")
+  startDate      DateTime?
+  endDate        DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  generations    Generation[]
+  assets         Asset[]
+}
+
+model Generation {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectId      String?
+  project        Project?     @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  campaignId     String?
+  campaign       Campaign?    @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  brandKitId     String?
+  brandKit       BrandKit?    @relation(fields: [brandKitId], references: [id], onDelete: SetNull)
+
+  type           String       // AD, BANNER, POSTER, VIDEO, COPY, BRAND
+  title          String
+  prompt         String
+  settingsJson   String       @default("{}")
+  outputJson     String       // Output payload (variations, copy, layout, media URLs)
+  status         String       @default("COMPLETED") // PENDING, PROCESSING, COMPLETED, FAILED
+  provider       String       @default("SYNTHESIS_ENGINE") // SYNTHESIS_ENGINE, GEMINI, OPENAI
+  tokensUsed     Int          @default(0)
+  creditsCost    Int          @default(1)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  assets         Asset[]
+  prompts        Prompt[]
+}
+
+model Prompt {
+  id           String      @id @default(uuid())
+  generationId String
+  generation   Generation  @relation(fields: [generationId], references: [id], onDelete: Cascade)
+  role         String      @default("user") // system, user, assistant
+  content      String
+  createdAt    DateTime    @default(now())
+}
+
+model Asset {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  projectId      String?
+  project        Project?     @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  campaignId     String?
+  campaign       Campaign?    @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  generationId   String?
+  generation     Generation?  @relation(fields: [generationId], references: [id], onDelete: SetNull)
+
+  name           String
+  type           String       // IMAGE, VIDEO, SVG, TEXT, AUDIO
+  url            String
+  thumbnail      String?
+  dimensions     String?      // e.g. "1080x1080", "1920x1080"
+  sizeBytes      Int          @default(0)
+  format         String       @default("PNG") // PNG, MP4, SVG, JSON, WEBP
+  tagsJson       String       @default("[]")
+  createdAt      DateTime     @default(now())
+}
+
+model Automation {
+  id                String          @id @default(uuid())
+  organizationId    String
+  organization      Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId            String
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name              String
+  description       String?
+  triggerType       String          // SCHEDULED, WEBHOOK, ASSET_CREATED, MANUAL
+  triggerConfigJson String          @default("{}")
+  isActive          Boolean         @default(true)
+  stepsJson         String          // Array of workflow steps (triggers, AI generation, filters, actions)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  runs              AutomationRun[]
+  workflowSteps     WorkflowStep[]
+}
+
+model WorkflowStep {
+  id           String     @id @default(uuid())
+  automationId String
+  automation   Automation @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  stepIndex    Int
+  name         String
+  stepType     String     // TRIGGER, AI_GENERATE, FILTER, EXPORT, NOTIFY
+  configJson   String     @default("{}")
+  createdAt    DateTime   @default(now())
+}
+
+model AutomationRun {
+  id             String     @id @default(uuid())
+  automationId   String
+  automation     Automation @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  status         String     @default("PENDING") // PENDING, RUNNING, COMPLETED, FAILED
+  inputDataJson  String     @default("{}")
+  outputDataJson String     @default("{}")
+  logsJson       String     @default("[]")
+  durationMs     Int        @default(0)
+  createdAt      DateTime   @default(now())
+}
+
+model Agent {
+  id               String     @id @default(uuid())
+  organizationId   String
+  organization     Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name             String
+  role             String
+  avatar           String?
+  description      String?
+  systemPrompt     String
+  capabilitiesJson String     @default("[]")
+  schedule         String?    // e.g. "Every 6 hours", "Daily at 9AM"
+  status           String     @default("ACTIVE") // ACTIVE, PAUSED, IDLE
+  lastRunAt        DateTime?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  runs             AgentRun[]
+}
+
+model AgentRun {
+  id         String   @id @default(uuid())
+  agentId    String
+  agent      Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  task       String
+  status     String   @default("COMPLETED") // RUNNING, COMPLETED, FAILED
+  resultJson String   @default("{}")
+  logsJson   String   @default("[]")
+  createdAt  DateTime @default(now())
+}
+
+model Usage {
+  id                String       @id @default(uuid())
+  organizationId    String
+  organization      Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId            String
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  period            String       // e.g. "2026-08"
+  creditsUsed       Int          @default(0)
+  creditsLimit      Int          @default(1000)
+  generationsCount  Int          @default(0)
+  videosRendered    Int          @default(0)
+  automationsRun    Int          @default(0)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  @@unique([organizationId, period])
+}
+
+model Subscription {
+  id                 String       @id @default(uuid())
+  organizationId     String
+  organization       Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  plan               String       @default("PRO") // STARTER, PRO, ENTERPRISE
+  status             String       @default("ACTIVE") // ACTIVE, PAST_DUE, CANCELED
+  currentPeriodStart DateTime     @default(now())
+  currentPeriodEnd   DateTime
+  cancelAtPeriodEnd  Boolean      @default(false)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+}
+
+model Transaction {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  amount         Float
+  currency       String       @default("USD")
+  status         String       @default("PAID") // PAID, PENDING, FAILED
+  description    String
+  invoiceUrl     String?
+  createdAt      DateTime     @default(now())
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   @default("SYSTEM") // SYSTEM, GENERATION_READY, AUTOMATION_COMPLETED, BILLING
+  isRead    Boolean  @default(false)
+  linkUrl   String?
+  createdAt DateTime @default(now())
+}
+
+model ApiKeyConfig {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  provider       String       // GEMINI, OPENAI, ANTHROPIC, REPLICATE
+  keyMasked      String       // e.g. "sk-...ab12"
+  encryptedKey   String       // Base64 or encrypted key
+  isActive       Boolean      @default(true)
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([organizationId, provider])
+}

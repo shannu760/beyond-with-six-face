@@ -1,0 +1,6 @@
+{
+  "name": "BEYOND Portfolio",
+  "description": "The Personal Portfolio & Creative Lab of Shanmukha Krishna — AI Creator & Builder. Built with Next.js 14, Three.js WebGL, Canvas 2D, and Motion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

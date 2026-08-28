@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-olive-primary: #556B2F;
+    --color-olive-deep: #6B7A3A;
+    --color-beige-warm: #F3EBDD;
+    --color-beige-soft: #E8DDC8;
+    --color-text-dark: #28301D;
+    --color-text-muted: #6F735F;
+    --color-beige-light: #FAF7EF;
+  }
+
+  html {
+    background-color: var(--color-beige-warm);
+    color: var(--color-text-dark);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    background-color: #F3EBDD;
+    color: #28301D;
+    overflow-x: hidden;
+    selection-background-color: #556B2F;
+    selection-color: #FAF7EF;
+  }
+
+  ::selection {
+    background-color: #556B2F;
+    color: #FAF7EF;
+  }
+}
+
+/* Lenis smooth scroll engine support */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #E8DDC8;
+}
+::-webkit-scrollbar-thumb {
+  background: #6B7A3A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #556B2F;
+}
+
+/* Noise overlay effect */
+.bg-noise {
+  background-image: radial-gradient(rgba(85, 107, 47, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Glassmorphic border */
+.glass-panel {
+  background: rgba(243, 235, 221, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(85, 107, 47, 0.12);
+}
+
+.glass-panel-dark {
+  background: rgba(40, 48, 29, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(243, 235, 221, 0.15);
+}
+
+/* Smooth luxury hover helpers */
+.hover-lift {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -8px rgba(85, 107, 47, 0.16);
+}
+
+.smooth-transition {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom cursor hide default */
+@media (min-width: 1024px) {
+  body.has-custom-cursor {
+    cursor: none;
+  }
+  body.has-custom-cursor a,
+  body.has-custom-cursor button {
+    cursor: none;
+  }
+}

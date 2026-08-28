@@ -1,0 +1,1 @@
+export default function AboutPage() { return <main className="bg-beige text-olive-dark pt-28 pb-20"><div className="section-container"><h1 className="heading-section">About & Trust</h1></div></main>; }
