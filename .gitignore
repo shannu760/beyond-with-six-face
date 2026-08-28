@@ -26,6 +26,8 @@
 *.m4a
 *.db
 *.sqlite
+/public/source/
+/BEYOND_Portfolio_Website/
 
 # nested build backups
 BEYOND_Portfolio_Website.zip
