@@ -1,7 +1,7 @@
 "use client";
 
-import { SylvaHero } from "@designcodeio/threeui";
-import "@designcodeio/threeui/style.css";
+import { SylvaHero } from "@/shaders/threeui-entry";
+import "@/shaders/threeui.css";
 
 export function Scene() {
   return (

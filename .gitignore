@@ -14,7 +14,7 @@
 # production
 /build
 
-# large media & archives (exceeding git limits)
+# large media, project archives & video edits
 *.zip
 *.tar
 *.gz
@@ -26,6 +26,8 @@
 *.m4a
 *.db
 *.sqlite
+*.prproj
+Adobe Premiere Pro Auto-Save/
 /public/source/
 /BEYOND_Portfolio_Website/
 
@@ -45,8 +47,9 @@ yarn-error.log*
 .env*.local
 .env
 
-# vercel
+# vercel & netlify
 .vercel
+.netlify
 
 # typescript
 *.tsbuildinfo
