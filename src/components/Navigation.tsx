@@ -40,16 +40,21 @@ export function Navigation() {
           href="#hero"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="pointer-events-auto flex items-center gap-3 px-4 py-2 rounded-full bg-[#F3EBDD]/85 backdrop-blur-md border border-[#556B2F]/20 shadow-sm group hover:border-[#556B2F]/40 transition-all duration-300"
+          className="pointer-events-auto flex items-center gap-3 px-4 py-2 rounded-full bg-[#F3EBDD]/90 backdrop-blur-md border border-[#556B2F]/20 shadow-sm group hover:border-[#556B2F]/40 transition-all duration-300"
         >
           <img
             src="/images/profile-logo.png"
             alt="BEYOND emblem"
             className="w-7 h-7 object-contain rounded-full group-hover:scale-105 transition-transform duration-300"
           />
-          <span className="font-extrabold text-sm tracking-widest text-[#28301D] group-hover:text-[#556B2F] transition-colors">
-            {SOCIAL_LINKS.brand}
-          </span>
+          <div className="flex flex-col text-left">
+            <span className="font-extrabold text-sm tracking-widest text-[#28301D] group-hover:text-[#556B2F] transition-colors leading-none">
+              {SOCIAL_LINKS.brand}
+            </span>
+            <span className="text-[8px] uppercase tracking-[0.2em] font-mono text-[#556B2F] font-bold mt-0.5">
+              WEAR OUR PROSPERITY.
+            </span>
+          </div>
         </motion.a>
 
         {/* Desktop Navigation Links */}

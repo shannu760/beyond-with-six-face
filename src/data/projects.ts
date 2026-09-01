@@ -16,17 +16,17 @@ export interface Project {
 
 export const PROJECTS_DATA: Project[] = [
   {
-    id: "beyond-ai-platform",
+    id: "beyond-n8n-platform",
     number: "01",
-    title: "BEYOND — Autonomous Agent Ecosystem",
-    subtitle: "Multi-Agent AI Workspace & Creative Engine",
-    description: "An intelligent multi-agent platform combining generative workflow orchestration, real-time code synthesis, and high-performance WebGL interfaces.",
-    fullDescription: "Designed and built from scratch as an end-to-end autonomous environment. Integrates custom prompt compilers, live canvas rendering, and reactive state management.",
+    title: "BEYOND — AI Workflow Automation Engine (n8n Clone)",
+    subtitle: "Visual Node Graph & Autonomous Execution Runtime",
+    description: "A full-stack workflow automation platform combining interactive pan/zoom node graphs, DAG topological execution, NVIDIA Nemotron AI pipelines, and webhooks.",
+    fullDescription: "Engineered from scratch with live node glow telemetry, sandboxed JS expression evaluation, Prisma SQLite database persistence, and multi-step pipeline automation.",
     category: "AI & Systems",
     year: "2026",
-    tags: ["Next.js", "React", "TypeScript", "Three.js", "AI Agents", "Tailwind CSS"],
+    tags: ["Next.js 14", "TypeScript", "Node Graph", "DAG Engine", "NVIDIA Nemotron", "Prisma", "Tailwind CSS"],
     image: "/images/showcase-1.png",
-    liveUrl: "/student/dashboard",
+    liveUrl: "http://localhost:3002",
     githubUrl: "https://github.com/shannu760/beyond-portfolio",
     featured: true
   },

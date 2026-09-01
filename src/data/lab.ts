@@ -7,9 +7,21 @@ export interface LabExperiment {
   accentColor: string;
   tags: string[];
   interactiveType: "shader" | "particles" | "motion" | "ai";
+  url?: string;
 }
 
 export const LAB_EXPERIMENTS: LabExperiment[] = [
+  {
+    id: "exp-00",
+    title: "BEYOND n8n AI Node Canvas",
+    category: "AI & Autonomous DAG",
+    description: "Visual node graph editor executing DAG pipelines, NVIDIA Nemotron AI inference, and automated webhooks.",
+    badge: "n8n Runtime",
+    accentColor: "#C8A95B",
+    tags: ["DAG Engine", "Node Canvas", "Nemotron AI", "Prisma"],
+    interactiveType: "ai",
+    url: "http://localhost:3002"
+  },
   {
     id: "exp-01",
     title: "Verdant Swarm Simulator",
