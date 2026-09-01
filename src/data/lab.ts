@@ -20,7 +20,7 @@ export const LAB_EXPERIMENTS: LabExperiment[] = [
     accentColor: "#C8A95B",
     tags: ["DAG Engine", "Node Canvas", "Nemotron AI", "Prisma"],
     interactiveType: "ai",
-    url: "http://localhost:3002"
+    url: "/n8n"
   },
   {
     id: "exp-01",

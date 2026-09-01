@@ -114,3 +114,36 @@ html.lenis, html.lenis body {
     cursor: none;
   }
 }
+
+/* Node Canvas Specific Styles */
+.canvas-grid {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(85, 107, 47, 0.22) 1.5px, transparent 1.5px);
+}
+
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+
+.edge-flow-animated {
+  stroke-dasharray: 6 6;
+  animation: flowDash 0.8s linear infinite;
+}
+
+.node-glow-running {
+  box-shadow: 0 0 25px 3px rgba(200, 169, 91, 0.45);
+  border-color: #C8A95B !important;
+}
+
+.node-glow-success {
+  box-shadow: 0 0 25px 3px rgba(16, 185, 129, 0.35);
+  border-color: #10B981 !important;
+}
+
+.node-glow-error {
+  box-shadow: 0 0 25px 3px rgba(244, 63, 94, 0.45);
+  border-color: #F43F5E !important;
+}
+

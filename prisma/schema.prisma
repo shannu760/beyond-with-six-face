@@ -339,3 +339,57 @@ model ApiKeyConfig {
 
   @@unique([organizationId, provider])
 }
+
+model Workflow {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  active      Boolean     @default(true)
+  triggerType String      @default("manual") // manual, webhook, schedule
+  webhookPath String?     @unique
+  nodes       String      @default("[]") // JSON string of nodes array
+  edges       String      @default("[]") // JSON string of edges array
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  executions  Execution[]
+}
+
+model Execution {
+  id            String             @id @default(cuid())
+  workflowId    String
+  workflow      Workflow           @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  status        String             @default("running") // running, success, error
+  startedAt     DateTime           @default(now())
+  finishedAt    DateTime?
+  durationMs    Int?
+  triggerSource String             @default("manual") // manual, webhook, test
+  initialData   String?            // JSON input
+  resultData    String?            // Final output JSON
+  error         String?
+  logs          ExecutionStepLog[]
+}
+
+model ExecutionStepLog {
+  id          String    @id @default(cuid())
+  executionId String
+  execution   Execution @relation(fields: [executionId], references: [id], onDelete: Cascade)
+  nodeId      String
+  nodeName    String
+  nodeType    String
+  status      String    @default("pending") // pending, running, success, error
+  inputData   String?   // JSON input received by this node
+  outputData  String?   // JSON output produced by this node
+  error       String?
+  durationMs  Int?
+  executedAt  DateTime  @default(now())
+}
+
+model Credential {
+  id        String   @id @default(cuid())
+  name      String
+  type      String   // nvidia, openai, smtp, webhook, database, custom_header
+  data      String   // JSON string of key-value pairs
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+

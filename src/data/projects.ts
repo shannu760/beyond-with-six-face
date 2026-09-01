@@ -18,15 +18,15 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: "beyond-n8n-platform",
     number: "01",
-    title: "BEYOND — AI Workflow Automation Engine (n8n Clone)",
+    title: "BEYOND — AI Workflow Automation Engine",
     subtitle: "Visual Node Graph & Autonomous Execution Runtime",
     description: "A full-stack workflow automation platform combining interactive pan/zoom node graphs, DAG topological execution, NVIDIA Nemotron AI pipelines, and webhooks.",
-    fullDescription: "Engineered from scratch with live node glow telemetry, sandboxed JS expression evaluation, Prisma SQLite database persistence, and multi-step pipeline automation.",
+    fullDescription: "Engineered from scratch with live node glow telemetry, sandboxed JS expression evaluation, Prisma database persistence, and multi-step pipeline automation.",
     category: "AI & Systems",
     year: "2026",
     tags: ["Next.js 14", "TypeScript", "Node Graph", "DAG Engine", "NVIDIA Nemotron", "Prisma", "Tailwind CSS"],
     image: "/images/showcase-1.png",
-    liveUrl: "http://localhost:3002",
+    liveUrl: "/n8n",
     githubUrl: "https://github.com/shannu760/beyond-portfolio",
     featured: true
   },
