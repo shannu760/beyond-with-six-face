@@ -26,7 +26,7 @@ export const PROJECTS_DATA: Project[] = [
     year: "2026",
     tags: ["Next.js", "React", "TypeScript", "Three.js", "AI Agents", "Tailwind CSS"],
     image: "/images/showcase-1.png",
-    liveUrl: "http://localhost:3005",
+    liveUrl: "https://github.com/shannu760",
     githubUrl: "https://github.com/shannu760",
     featured: true
   },
@@ -42,7 +42,7 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["Three.js", "WebGL", "GLSL", "React Three Fiber", "Motion"],
     image: "/images/showcase-2.png",
     liveUrl: "/scene",
-    githubUrl: "https://github.com/shannu760/beyond-with-six-face-lattice",
+    githubUrl: "https://github.com/shannu760/beyond-with-six-face",
     featured: true
   },
   {
@@ -56,6 +56,7 @@ export const PROJECTS_DATA: Project[] = [
     year: "2025",
     tags: ["Generative AI", "Python", "Node.js", "Video Processing", "AI Audio"],
     image: "/images/showcase-3.png",
+    liveUrl: "https://youtube.com/@the_dimensionless",
     githubUrl: "https://github.com/shannu760",
     featured: true
   },
@@ -70,7 +71,8 @@ export const PROJECTS_DATA: Project[] = [
     year: "2026",
     tags: ["Next.js", "Framer Motion", "Tailwind CSS", "UI/UX Design"],
     image: "/images/showcase-4.png",
-    githubUrl: "https://github.com/shannu760/beyond-with-six-face-lattice",
+    liveUrl: "/#hero",
+    githubUrl: "https://github.com/shannu760/beyond-with-six-face",
     featured: true
   }
 ];
