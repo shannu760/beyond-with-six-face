@@ -10,6 +10,9 @@ export interface Project {
   tags: string[];
   image: string;
   liveUrl?: string;
+  liveLabel?: string;
+  secondaryUrl?: string;
+  secondaryLabel?: string;
   githubUrl?: string;
   featured?: boolean;
 }
@@ -27,6 +30,7 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["Next.js 14", "TypeScript", "Node Graph", "DAG Engine", "NVIDIA Nemotron", "Prisma", "Tailwind CSS"],
     image: "/images/showcase-1.png",
     liveUrl: "/n8n",
+    liveLabel: "Launch n8n Studio",
     githubUrl: "https://github.com/shannu760/beyond-portfolio",
     featured: true
   },
@@ -34,14 +38,17 @@ export const PROJECTS_DATA: Project[] = [
     id: "six-face-lattice",
     number: "02",
     title: "Six-Face Lattice Matrix",
-    subtitle: "Interactive 3D Geometric Shader Playground",
-    description: "An experimental 3D geometry engine exploring volumetric refraction, GPU-instanced particle networks, and real-time audio reactivity.",
-    fullDescription: "Built with custom GLSL shaders and Three.js physics. Explores mathematical lattice symmetry and interactive fluid motion in browser viewports.",
+    subtitle: "Interactive 3D Geometric Shader & Autonomous Agent Ecosystem",
+    description: "An experimental 3D geometry engine exploring volumetric refraction, GPU-instanced particle networks, and real-time audio reactivity, integrated with the autonomous agentic growth ecosystem.",
+    fullDescription: "Built with custom GLSL shaders and Three.js physics. Explores mathematical lattice symmetry and interactive fluid motion in browser viewports, integrated with the BEYOND Autonomous Agent Ecosystem.",
     category: "3D & Creative Coding",
     year: "2025",
-    tags: ["Three.js", "WebGL", "GLSL", "React Three Fiber", "Motion"],
+    tags: ["Three.js", "WebGL", "GLSL", "React Three Fiber", "AI Agent Ecosystem", "Motion"],
     image: "/images/showcase-2.png",
-    liveUrl: "/scene",
+    liveUrl: "/student/dashboard",
+    liveLabel: "Agentic Ecosystem",
+    secondaryUrl: "/scene",
+    secondaryLabel: "3D Shader Matrix",
     githubUrl: "https://github.com/shannu760/beyond-with-six-face",
     featured: true
   },
@@ -57,6 +64,7 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["Generative AI", "Python", "Node.js", "Video Processing", "AI Audio"],
     image: "/images/showcase-3.png",
     liveUrl: "https://youtube.com/@the_dimensionless",
+    liveLabel: "Watch Productions",
     githubUrl: "https://github.com/shannu760",
     featured: true
   },
@@ -72,6 +80,7 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["Next.js", "Framer Motion", "Tailwind CSS", "UI/UX Design"],
     image: "/images/showcase-4.png",
     liveUrl: "/#hero",
+    liveLabel: "View Experience",
     githubUrl: "https://github.com/shannu760/beyond-with-six-face",
     featured: true
   }

@@ -167,7 +167,7 @@ export function Projects() {
                   </div>
 
                   {/* Links */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-3">
                     {project.liveUrl && (
                       project.liveUrl.startsWith("http") ? (
                         <a
@@ -176,7 +176,7 @@ export function Projects() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#556B2F] text-[#FAF7EF] text-xs font-semibold hover:bg-[#6B7A3A] hover:shadow-[0_12px_24px_-6px_rgba(85,107,47,0.35)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 shadow-sm"
                         >
-                          <span>Live Preview</span>
+                          <span>{project.liveLabel || "Live Preview"}</span>
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                       ) : (
@@ -184,10 +184,19 @@ export function Projects() {
                           href={project.liveUrl}
                           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#556B2F] text-[#FAF7EF] text-xs font-semibold hover:bg-[#6B7A3A] hover:shadow-[0_12px_24px_-6px_rgba(85,107,47,0.35)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 shadow-sm"
                         >
-                          <span>Launch Experience</span>
+                          <span>{project.liveLabel || "Launch Experience"}</span>
                           <ArrowUpRight className="w-3.5 h-3.5" />
                         </Link>
                       )
+                    )}
+                    {project.secondaryUrl && (
+                      <Link
+                        href={project.secondaryUrl}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FAF7EF] border border-[#556B2F]/25 text-[#28301D] text-xs font-semibold hover:bg-[#E8DDC8] hover:border-[#556B2F]/50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 shadow-xs"
+                      >
+                        <span>{project.secondaryLabel || "Interactive Mode"}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-[#556B2F]" />
+                      </Link>
                     )}
                     {project.githubUrl && (
                       <a

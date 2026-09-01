@@ -25,9 +25,19 @@ export function Scene() {
           <span>Back to Portfolio</span>
         </Link>
 
-        <div className="pointer-events-auto hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-[#182012]/80 backdrop-blur-xl border border-[#556B2F]/40 text-[#FAF7EF] text-xs font-semibold tracking-wide shadow-lg">
-          <Sparkles className="w-3.5 h-3.5 text-[#8A9A5B] animate-pulse" />
-          <span>Six-Face Lattice Matrix • 3D GLSL Shader</span>
+        <div className="pointer-events-auto flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-[#182012]/80 backdrop-blur-xl border border-[#556B2F]/40 text-[#FAF7EF] text-xs font-semibold tracking-wide shadow-lg">
+            <Sparkles className="w-3.5 h-3.5 text-[#8A9A5B] animate-pulse" />
+            <span>Six-Face Lattice Matrix</span>
+          </div>
+
+          <Link
+            href="/student/dashboard"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C8A95B] text-[#12170D] text-xs font-bold uppercase tracking-wider hover:bg-[#d4b566] transition-all shadow-md active:scale-95"
+          >
+            <span>Agentic Ecosystem</span>
+            <ArrowLeft className="w-3.5 h-3.5 rotate-180" />
+          </Link>
         </div>
       </div>
 
