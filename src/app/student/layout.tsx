@@ -22,27 +22,27 @@ import {
   CheckCircle2,
   Clock,
   ArrowUpRight,
+  ArrowLeft,
   Rocket,
   PiggyBank,
   Code2
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { name: "Growth Hub", href: "/dashboard", icon: Compass },
-  { name: "AI Assistant", href: "/ai", icon: Sparkles, badge: "PRO" },
-  { name: "Study Planner", href: "/study/planner", icon: BookOpen },
-  { name: "Study Rooms", href: "/study/rooms", icon: Users, badge: "Live" },
-  { name: "Exams & Quizzes", href: "/exams", icon: Target },
-  { name: "Mastery Matrix", href: "/exams/performance", icon: GraduationCap },
-  { name: "Course Explorer", href: "/guidance/courses", icon: Compass },
-  { name: "Project Builder", href: "/projects", icon: Rocket },
-  { name: "Skill Assessments", href: "/skills", icon: Code2 },
-  { name: "Community & Help", href: "/community", icon: Users },
-  { name: "Idea Lab", href: "/ideas", icon: Lightbulb },
-  { name: "Opportunities Radar", href: "/opportunities", icon: Search },
-  { name: "Financial Literacy", href: "/financial-literacy", icon: PiggyBank },
-  { name: "Parent Overview", href: "/parent", icon: Users },
-  { name: "BEYOND Profile", href: "/profile", icon: Award }
+  { name: "Growth Hub", href: "/student/dashboard", icon: Compass },
+  { name: "AI Assistant", href: "/student/ai", icon: Sparkles, badge: "PRO" },
+  { name: "Study Planner", href: "/student/study/planner", icon: BookOpen },
+  { name: "Study Rooms", href: "/student/study/rooms", icon: Users, badge: "Live" },
+  { name: "Exams & Quizzes", href: "/student/exams", icon: Target },
+  { name: "Course Explorer", href: "/student/guidance/courses", icon: Compass },
+  { name: "Project Builder", href: "/student/projects", icon: Rocket },
+  { name: "Skill Assessments", href: "/student/skills", icon: Code2 },
+  { name: "Community & Help", href: "/student/community", icon: Users },
+  { name: "Idea Lab", href: "/student/ideas", icon: Lightbulb },
+  { name: "Opportunities Radar", href: "/student/opportunities", icon: Search },
+  { name: "Financial Literacy", href: "/student/financial-literacy", icon: PiggyBank },
+  { name: "Parent Overview", href: "/student/parent", icon: Users },
+  { name: "BEYOND Profile", href: "/student/profile", icon: Award }
 ];
 
 export default function StudentLayout({
@@ -69,7 +69,7 @@ export default function StudentLayout({
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
 
-          <Link href="/dashboard" className="flex items-center gap-2.5 group">
+          <Link href="/student/dashboard" className="flex items-center gap-2.5 group">
             <div className="w-9 h-9 rounded-lg bg-[#3D4425] border border-[#C8A95B]/40 flex items-center justify-center font-accent font-bold text-lg text-[#C8A95B] group-hover:border-[#C8A95B] transition-colors shadow-inner">
               B
             </div>
@@ -78,18 +78,26 @@ export default function StudentLayout({
                 BEYOND
               </span>
               <span className="hidden sm:inline-block ml-2 text-[10px] uppercase tracking-widest font-mono text-[#C8A95B] bg-[#C8A95B]/10 px-2 py-0.5 rounded border border-[#C8A95B]/30">
-                Student Network
+                Agentic AI Ecosystem
               </span>
             </div>
           </Link>
         </div>
 
-        {/* Header Right — Gamification & Profile Pill */}
-        <div className="flex items-center gap-3 sm:gap-5">
+        {/* Header Right — Back to Portfolio + Gamification */}
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Link
+            href="/#work"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#3D4425] border border-[#C8A95B]/40 text-[#FAF7EF] text-xs font-semibold hover:bg-[#4D562E] hover:border-[#C8A95B] transition-all shadow-sm"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 text-[#C8A95B]" />
+            <span className="hidden sm:inline">Portfolio</span>
+          </Link>
+
           {/* Streaks Pill */}
           <div className="flex items-center gap-1.5 bg-[#3D4425]/80 px-3 py-1.5 rounded-full border border-[#69704A]/30 text-xs font-semibold text-[#E8DCC3] shadow-sm">
             <Flame className="w-4 h-4 text-orange-400 fill-orange-400 animate-pulse" />
-            <span>12 Days</span>
+            <span className="hidden sm:inline">12 Days</span>
           </div>
 
           {/* Stars Ledger Balance */}
@@ -98,15 +106,9 @@ export default function StudentLayout({
             <span>1,450 ⭐</span>
           </div>
 
-          {/* Notifications */}
-          <button className="relative p-2 rounded-full hover:bg-[#3D4425] text-[#E8DCC3] transition-colors">
-            <Bell className="w-4 h-4" />
-            <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#C8A95B]" />
-          </button>
-
           {/* Student Profile Quick Avatar */}
           <Link
-            href="/profile"
+            href="/student/profile"
             className="flex items-center gap-2 pl-2 sm:pl-3 border-l border-[#69704A]/30 group"
           >
             <div className="w-8 h-8 rounded-full bg-[#E8DCC3] text-[#252B18] font-bold text-xs flex items-center justify-center border border-[#C8A95B] group-hover:scale-105 transition-transform">
@@ -135,32 +137,44 @@ export default function StudentLayout({
             {/* Primary Nav Menu */}
             <div>
               <div className="text-[10px] uppercase font-mono tracking-widest text-[#69704A] px-3 mb-2 font-semibold">
-                Student Navigation
+                Autonomous AI Hub
               </div>
               <nav className="space-y-1">
                 {NAV_ITEMS.map((item) => {
-                  const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname?.startsWith(item.href));
                   const Icon = item.icon;
+                  const isActive = pathname === item.href || (item.href !== "/student/dashboard" && pathname.startsWith(item.href));
                   return (
                     <Link
                       key={item.href}
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={`
-                        flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium transition-all duration-200
+                        flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all group
                         ${
                           isActive
-                            ? "bg-[#3D4425] text-[#F3EBDD] font-semibold border-l-4 border-[#C8A95B] shadow-md pl-2.5"
+                            ? "bg-[#3D4425] text-[#F3EBDD] font-bold shadow-inner border border-[#C8A95B]/30"
                             : "text-[#D9CAA8]/80 hover:bg-[#3D4425]/50 hover:text-[#F3EBDD]"
                         }
                       `}
                     >
-                      <div className="flex items-center gap-3">
-                        <Icon className={`w-4 h-4 ${isActive ? "text-[#C8A95B]" : "text-[#69704A]"}`} />
+                      <div className="flex items-center gap-2.5">
+                        <Icon
+                          className={`w-4 h-4 transition-colors ${
+                            isActive
+                              ? "text-[#C8A95B]"
+                              : "text-[#69704A] group-hover:text-[#C8A95B]"
+                          }`}
+                        />
                         <span>{item.name}</span>
                       </div>
                       {item.badge && (
-                        <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-[#C8A95B]/20 text-[#C8A95B] border border-[#C8A95B]/30">
+                        <span
+                          className={`text-[9px] font-mono px-1.5 py-0.5 rounded uppercase font-bold tracking-wider ${
+                            item.badge === "PRO"
+                              ? "bg-[#C8A95B]/20 text-[#C8A95B] border border-[#C8A95B]/40"
+                              : "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                          }`}
+                        >
                           {item.badge}
                         </span>
                       )}
@@ -169,153 +183,40 @@ export default function StudentLayout({
                 })}
               </nav>
             </div>
-
-            {/* Quick Diagnostic Badge Card */}
-            <div className="bg-[#3D4425]/70 border border-[#69704A]/30 rounded-xl p-3.5 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#C8A95B]">
-                <Sparkles className="w-4 h-4" />
-                <span>Pathway Status</span>
-              </div>
-              <p className="text-[11px] text-[#E8DCC3]/80 leading-relaxed">
-                JEE Main 2027 Alignment: <strong className="text-[#F3EBDD]">88% Strong</strong>
-              </p>
-              <Link
-                href="/ai"
-                className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#C8A95B] hover:underline"
-              >
-                <span>Re-assess with AI</span>
-                <ChevronRight className="w-3 h-3" />
-              </Link>
-            </div>
           </div>
 
-          {/* Footer Note */}
-          <div className="pt-4 border-t border-[#69704A]/20 text-[10px] text-[#69704A] flex items-center justify-between">
-            <span>BEYOND v1.0 • AY 2026-27</span>
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          </div>
-        </aside>
-
-        {/* Main Content Area */}
-        <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 z-10 max-w-6xl mx-auto">
-          {children}
-        </main>
-
-        {/* Right Action Rail ("What should I do next?") */}
-        <aside className="hidden xl:block w-80 sticky top-[57px] h-[calc(100vh-57px)] border-l border-[#3D4425]/15 p-5 space-y-6 overflow-y-auto bg-[#E8DCC3]/40">
-          {/* North-Star Card: WHAT TO DO NEXT */}
-          <div className="bg-[#252B18] text-[#F3EBDD] rounded-2xl p-5 shadow-lg border border-[#C8A95B]/30 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-[#C8A95B]/20 to-transparent rounded-full blur-xl pointer-events-none" />
-
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[10px] uppercase font-mono tracking-widest font-bold text-[#C8A95B]">
-                North Star Guide
-              </span>
-              <span className="w-2 h-2 rounded-full bg-[#C8A95B] animate-ping" />
-            </div>
-
-            <h3 className="font-accent font-bold text-lg text-[#F3EBDD] leading-tight mb-2">
-              What should I do next?
-            </h3>
-            <p className="text-xs text-[#D9CAA8]/80 leading-relaxed mb-4">
-              Your highest-yield action right now to improve your weak topic <strong className="text-[#F3EBDD]">Electrostatics</strong>:
-            </p>
-
-            <div className="bg-[#3D4425] rounded-xl p-3.5 border border-[#69704A]/30 space-y-2.5 mb-4">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#F3EBDD]">
-                <Clock className="w-4 h-4 text-[#C8A95B]" />
-                <span>15-Min Chapter Quiz</span>
-              </div>
-              <p className="text-[11px] text-[#E8DCC3]/70">
-                3 high-yield questions on Electric Dipole & Gauss Law.
-              </p>
-              <div className="flex items-center justify-between text-[10px] text-[#C8A95B] font-mono font-bold pt-1 border-t border-[#69704A]/30">
-                <span>+50 Stars Reward</span>
-                <span>Est. 12 mins</span>
-              </div>
-            </div>
-
+          {/* Bottom Sidebar Widget */}
+          <div className="pt-4 border-t border-[#69704A]/20">
             <Link
-              href="/exams"
-              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-[#C8A95B] text-[#252B18] font-display font-bold text-xs uppercase tracking-wider hover:bg-[#d4b566] transition-all shadow-md group-hover:translate-y-[-1px]"
+              href="/student/ai"
+              className="p-3.5 rounded-2xl bg-gradient-to-br from-[#3D4425] to-[#2E351C] border border-[#C8A95B]/30 flex flex-col gap-2 group block hover:border-[#C8A95B]/60 transition-all shadow-md"
             >
-              <span>Start Diagnostic Quiz</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#F3EBDD]">
+                  <Sparkles className="w-3.5 h-3.5 text-[#C8A95B]" />
+                  <span>AI Agent Ready</span>
+                </div>
+                <ChevronRight className="w-3.5 h-3.5 text-[#C8A95B] group-hover:translate-x-1 transition-transform" />
+              </div>
+              <p className="text-[11px] text-[#D9CAA8]/80 leading-snug">
+                Ask your autonomous growth agent anything right now.
+              </p>
             </Link>
           </div>
-
-          {/* Today's Goal Progress */}
-          <div className="bg-[#F8F4EC] border border-[#3D4425]/15 rounded-xl p-4 space-y-3 shadow-sm">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-[#252B18] flex items-center gap-1.5">
-                <Target className="w-4 h-4 text-[#3D4425]" />
-                <span>Today&apos;s Target</span>
-              </span>
-              <span className="text-xs font-mono font-semibold text-[#69704A]">2 / 3 Tasks</span>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="w-full h-2 bg-[#E8DCC3] rounded-full overflow-hidden">
-              <div className="h-full bg-[#3D4425] rounded-full w-2/3 transition-all duration-500" />
-            </div>
-
-            <ul className="space-y-2 pt-1 text-xs text-[#3D4425]">
-              <li className="flex items-center gap-2 text-emerald-800 line-through opacity-70">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Physics Formula Review</span>
-              </li>
-              <li className="flex items-center gap-2 text-emerald-800 line-through opacity-70">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Calculus Limits Problem Set</span>
-              </li>
-              <li className="flex items-center gap-2 font-medium text-[#252B18]">
-                <div className="w-3.5 h-3.5 rounded-full border-2 border-[#3D4425] flex-shrink-0" />
-                <span>Complete Electrostatics Quiz</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Active Live Study Rooms */}
-          <div className="bg-[#F8F4EC] border border-[#3D4425]/15 rounded-xl p-4 space-y-3 shadow-sm">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-[#252B18] flex items-center gap-1.5">
-                <Users className="w-4 h-4 text-[#3D4425]" />
-                <span>Live Study Rooms</span>
-              </span>
-              <Link href="/study/rooms" className="text-[10px] font-semibold text-[#3D4425] hover:underline">
-                View All
-              </Link>
-            </div>
-
-            <div className="space-y-2">
-              <Link
-                href="/study/rooms"
-                className="block bg-[#E8DCC3]/60 hover:bg-[#E8DCC3] p-2.5 rounded-lg border border-[#3D4425]/10 transition-colors"
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-bold text-[#252B18]">⚡ JEE Physics Sprint</span>
-                  <span className="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-mono font-bold">
-                    8 Online
-                  </span>
-                </div>
-                <p className="text-[10px] text-[#69704A]">Topic: Kinematics & Mechanics</p>
-              </Link>
-
-              <Link
-                href="/study/rooms"
-                className="block bg-[#E8DCC3]/60 hover:bg-[#E8DCC3] p-2.5 rounded-lg border border-[#3D4425]/10 transition-colors"
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-bold text-[#252B18]">🧪 Organic Chem Deep Work</span>
-                  <span className="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-mono font-bold">
-                    5 Online
-                  </span>
-                </div>
-                <p className="text-[10px] text-[#69704A]">Topic: Reaction Mechanisms</p>
-              </Link>
-            </div>
-          </div>
         </aside>
+
+        {/* Backdrop for mobile drawer */}
+        {mobileMenuOpen && (
+          <div
+            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-20 lg:hidden"
+          />
+        )}
+
+        {/* Main Content Viewport */}
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+          {children}
+        </main>
       </div>
     </div>
   );

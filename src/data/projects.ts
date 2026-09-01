@@ -26,8 +26,8 @@ export const PROJECTS_DATA: Project[] = [
     year: "2026",
     tags: ["Next.js", "React", "TypeScript", "Three.js", "AI Agents", "Tailwind CSS"],
     image: "/images/showcase-1.png",
-    liveUrl: "https://github.com/shannu760",
-    githubUrl: "https://github.com/shannu760",
+    liveUrl: "/student/dashboard",
+    githubUrl: "https://github.com/shannu760/beyond-portfolio",
     featured: true
   },
   {
